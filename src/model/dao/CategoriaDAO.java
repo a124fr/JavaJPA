@@ -65,4 +65,24 @@ public class CategoriaDAO {
         return lista;
     }
     
+    public Categoria remove(int id) {
+        EntityTransaction transacao = em.getTransaction();
+        Categoria categoria = new Categoria();
+        
+        try {
+            categoria = em.find(Categoria.class, id);
+            transacao.begin();            
+            em.remove(categoria);
+            transacao.commit();
+            
+        } catch (Exception e) {
+            transacao.rollback();
+            System.err.println("ERRO: " + e);
+        } finally {
+            em.close();
+        }
+        
+        return categoria;
+    }
+    
 }

@@ -33,11 +33,18 @@ public class CategoriaTest {
         //Categoria categoria = dao.findById(2);
         //System.out.println(categoria);
         
-        CategoriaDAO dao = new CategoriaDAO();
+        /*CategoriaDAO dao = new CategoriaDAO();
         List<Categoria> categorias = dao.findAll();
         
         for(Categoria c:categorias) {
             System.out.println(c);
+        }*/
+        
+        CategoriaDAO dao = new CategoriaDAO();        
+        Categoria c = dao.remove(3); 
+        
+        if(c.getId() > 0) {
+            System.out.println("A categoria id: " + c.getId() + " foi removido com sucesso!");
         }
         
     }
