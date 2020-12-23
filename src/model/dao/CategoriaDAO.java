@@ -1,5 +1,7 @@
 package model.dao;
     
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import model.bean.Categoria;
@@ -7,8 +9,13 @@ import model.connection.ConnectionFactory;
 
 public class CategoriaDAO {
     
-    public Categoria save(Categoria categoria) {
-        EntityManager em = ConnectionFactory.getConnection();
+    private EntityManager em;
+
+    public CategoriaDAO() {
+        em = ConnectionFactory.getConnection(); 
+    }
+    
+    public Categoria save(Categoria categoria) {        
         EntityTransaction transacao = em.getTransaction();
         
         try {
@@ -22,6 +29,7 @@ public class CategoriaDAO {
             transacao.commit();
         } catch (Exception e) {
             transacao.rollback();
+            System.err.println("ERRO: " + e);
         } finally {
             em.close();
         }
@@ -30,16 +38,31 @@ public class CategoriaDAO {
     }
     
     public Categoria findById(int id) {
-        EntityManager em = ConnectionFactory.getConnection();                
         Categoria  categoria = new Categoria();
         
         try {
             categoria = em.find(Categoria.class, id);
         } catch (Exception e) {
-            
+            System.err.println("ERRO: " + e);
+        } finally {
+            em.close();
         }
         
         return categoria;
+    }
+    
+    public List<Categoria> findAll() {
+        List<Categoria> lista = new ArrayList<Categoria>();
+        
+        try {
+            lista = em.createQuery("from Categoria c").getResultList();
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e);
+        } finally {
+            em.close();
+        }
+        
+        return lista;
     }
     
 }
