@@ -8,14 +8,9 @@ import model.bean.Categoria;
 import model.connection.ConnectionFactory;
 
 public class CategoriaDAO {
-    
-    private EntityManager em;
-
-    public CategoriaDAO() {
-        em = ConnectionFactory.getConnection(); 
-    }
-    
+        
     public Categoria save(Categoria categoria) {        
+        EntityManager em = ConnectionFactory.getConnection(); 
         EntityTransaction transacao = em.getTransaction();
         
         try {
@@ -38,6 +33,8 @@ public class CategoriaDAO {
     }
     
     public Categoria findById(int id) {
+        EntityManager em = ConnectionFactory.getConnection(); 
+        
         Categoria  categoria = new Categoria();
         
         try {
@@ -52,6 +49,7 @@ public class CategoriaDAO {
     }
     
     public List<Categoria> findAll() {
+        EntityManager em = ConnectionFactory.getConnection(); 
         List<Categoria> lista = new ArrayList<Categoria>();
         
         try {
@@ -66,7 +64,9 @@ public class CategoriaDAO {
     }
     
     public Categoria remove(int id) {
+        EntityManager em = ConnectionFactory.getConnection(); 
         EntityTransaction transacao = em.getTransaction();
+        
         Categoria categoria = new Categoria();
         
         try {

@@ -6,6 +6,7 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <!-- Lista de entidades -->
     <class>model.bean.Categoria</class>
+    <class>model.bean.Produto</class>
     
     <properties>
       <!-- Propriedades JDBC -->
