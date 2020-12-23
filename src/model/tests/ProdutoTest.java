@@ -1,5 +1,6 @@
 package model.tests;
 
+import java.util.List;
 import model.bean.Categoria;
 import model.bean.Produto;
 import model.dao.ProdutoDAO;
@@ -33,10 +34,18 @@ public class ProdutoTest {
         dao.save(produto);
         */
         
+        /*
         ProdutoDAO dao = new ProdutoDAO();
         Produto p = dao.findById(1);
         System.out.println("Produto: " + p.getDescricao() 
-                + " Categoria: " + p.getCategoria().getDescricao());
-                
+                + " Categoria: " + p.getCategoria().getDescricao());*/
+        
+        ProdutoDAO dao = new ProdutoDAO();
+        List<Produto> lista = dao.findAll();
+        
+        for(Produto p:lista) {
+            System.out.println("Produto: " + p.getDescricao() 
+                    + " Categoria: " + p.getCategoria().getDescricao());
+        }
     }
 }

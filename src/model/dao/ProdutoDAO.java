@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import model.bean.Produto;
@@ -45,5 +47,20 @@ public class ProdutoDAO {
         }
         
         return produto;
+    }
+    
+    public List<Produto> findAll() {
+        EntityManager em = ConnectionFactory.getConnection();
+        List<Produto> produtos = new ArrayList<Produto>();
+        try {
+            produtos = em.createQuery("from Produto").getResultList();
+            
+        } catch (Exception e) {
+            System.err.println("ERRO: " + e);
+        } finally {
+            em.close();
+        }
+        
+        return produtos;
     }
 }
